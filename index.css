@@ -1,0 +1,12 @@
+@keyframes fadeOut{
+    0% { opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.RemoveEffect{
+    animation: fadeOut 1.2s;
+}
+
+.ChangeSizeEffect{
+    transition: height 0.4s;
+}
