@@ -13,6 +13,7 @@ function UpdateItemsHeight(){
 }
 
 window.addEventListener("beforeunload", function(){
+    if(Items.innerHTML == "" || Items.innerHTML == undefined) return;
     localStorage.setItem("data", Items.innerHTML);
 });
 
@@ -63,12 +64,16 @@ InputField.addEventListener("keyup", e => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-    if(localStorage.getItem("data") != null && localStorage.getItem("data") != "undefined")
+    if(localStorage.getItem("data") == null || localStorage.getItem("data") == "undefined") return;
     var Data = localStorage.getItem("data");
     Items.innerHTML = Data;
     Items.querySelectorAll("input").forEach(element => {
+        if(element.parentElement.classList.contains("RemoveEffect")){
+            element.parentElement.remove();
+            return;
+        }
         element.addEventListener("click", () => {
-            element.parentElement.classList.add("RemoveEffect");
+            element.parentElement.classList.toggle("RemoveEffect");
             element.parentElement.addEventListener("animationend", () => {
                 element.parentElement.remove();
                 UpdateItemsHeight();
